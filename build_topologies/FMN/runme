@@ -1,0 +1,3 @@
+conda activate openff # this env has Ambertools and acpype
+tleap -f build_FMN.leap
+acpype -p FMN.prmtop -x FMN.crd -o gmx
