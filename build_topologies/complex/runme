@@ -1,0 +1,1 @@
+gmx grompp -f em.mdp -c complex3_wATPtranslated.gro -r complex3_wATPtranslated.gro -p complex3_wATPtranslated.top -o em.tpr -v -maxwarn 2
