@@ -48365,10 +48365,6 @@ Protein_chain_A     3
  5126  5130  5128  5129     4 
  5130  5138  5137  5139     4 
 
-; Include Position restraint file
-#ifdef POSRES
-#include "receptor.itp"
-#endif
 
 ; Include FMN topology     
 #include "FMN_GMX.itp"
@@ -48377,16 +48373,11 @@ Protein_chain_A     3
 #include "ATP_GMX.itp"
 
 
-
 ; Include water topology
 #include "amber99sb.ff/tip3p.itp"
 
-#ifdef POSRES_WATER
-; Position restraint for each water oxygen
-[ position_restraints ]
-;  i funct       fcx        fcy        fcz
-   1    1       1000       1000       1000
-#endif
+; Position restraints for cofactors
+#include "take2_posre.itp"
 
 ; Include topology for ions
 #include "amber99sb.ff/ions.itp"
