@@ -1,0 +1,8 @@
+source oldff/leaprc.ff94
+parm_fmn = loadamberparams fmn.frcfld 
+loadoff FMN.off
+flavin_mononuc = sequence { FMN }
+savepdb flavin_mononuc FMN.pdb
+saveAmberParm flavin_mononuc FMN.prmtop FMN.crd
+quit
+
