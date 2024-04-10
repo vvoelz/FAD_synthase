@@ -1,0 +1,37 @@
+# The minimized confout.gro strutcure and topology (w/ restraints) were
+
+# taken from ../build_topologies/complex
+
+
+# Make sure the confout.gto file has clustered periodic images
+gmx trjconv -s em.tpr -f confout.gro -pbc cluster -o confout_cluster.gro
+
+# put the complex in a pbc box with some margins
+gmx editconf -f confout_cluster.gro -bt cubic -d 1.0 -o complex.gro
+
+# I added:
+# * a Mg+2 by hand into the complex.gro --> complex_Mg.gro
+# * an extra molecule to the system at the bottom of the take2.top --> complex_Mg.top
+
+# Minimize the system with the Mg2+
+gmx grompp -f em.mdp -c complex_Mg.gro -r complex_Mg.gro -p complex_Mg.top -o em.tpr -v -maxwarn 2
+gmx mdrun  -v -s em.tpr -c complex_Mg_min.gro
+
+# Add solvent
+gmx solvate -cp complex_Mg_min.gro -p complex_Mg.top -o complex_Mg_solvated.gro
+
+# Grompp to get a tpr
+gmx grompp -f em.mdp -c complex_Mg_solvated.gro -r complex_Mg_solvated.gro -p complex_Mg.top -o em_solvated.tpr -v -maxwarn 2
+# use the tpr to add counterions
+gmx genion -s em_solvated.tpr -p complex_Mg.top -o complex_Mg_solvated_ions.gro -conc 0.100 -neutral  # choose group SOL
+
+
+# minimize the solvated system!
+gmx grompp -f em_solvated.mdp -c complex_Mg_solvated_ions.gro -r complex_Mg_solvated_ions.gro -p complex_Mg.top -o em_solvated.tpr -v -maxwarn 2
+gmx mdrun  -v -s em_solvated.tpr -c complex_Mg_solvated_ions_min.gro
+
+# temperature pre-equilibration at NVT
+gmx grompp -f nvt_preequil.mdp -c complex_Mg_solvated_ions_min.gro -r complex_Mg_solvated_ions_min.gro -p complex_Mg.top -o nvt.tpr -v -maxwarn 2
+gmx mdrun  -v -s nvt.tpr -c nvt.gro
+
+
