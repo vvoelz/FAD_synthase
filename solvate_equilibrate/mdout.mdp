@@ -2,7 +2,7 @@
 ;	File 'mdout.mdp' was generated
 ;	By user: vv (504)
 ;	On host: cst14330.fios-router.home
-;	At date: Wed Apr 10 07:49:00 2024
+;	At date: Wed Apr 10 14:46:10 2024
 ;
 ;	Created by:
 ;	                     :-) GROMACS - gmx grompp, 2020.4 (-:
@@ -11,7 +11,7 @@
 ;	Data prefix:  /usr/local/gromacs
 ;	Working dir:  /Users/vv/git/FAD_synthase/solvate_equilibrate
 ;	Command line:
-;	  gmx grompp -f nvt_preequil.mdp -c complex_Mg_solvated_ions_min.gro -r complex_Mg_solvated_ions_min.gro -p complex_Mg.top -o nvt.tpr -v -maxwarn 2
+;	  gmx grompp -f em_solvated.mdp -c npt.gro -p complex_Mg_norest.top -o em_final.tpr -v -maxwarn 2
 
 ; VARIOUS PREPROCESSING OPTIONS
 ; Preprocessor information: use cpp syntax.
@@ -21,11 +21,11 @@ include                  =
 define                   = 
 
 ; RUN CONTROL PARAMETERS
-integrator               = md-vv
+integrator               = steep
 ; Start time and timestep in ps
 tinit                    = 0
-dt                       = 0.002
-nsteps                   = 50000
+dt                       = 0.001
+nsteps                   = 100000
 ; For exact run continuation or redoing part of a run
 init-step                = 0
 ; Part index is updated automatically on checkpointing (keeps files separate)
@@ -59,8 +59,8 @@ rtpi                     = 0.05
 
 ; OUTPUT CONTROL OPTIONS
 ; Output frequency for coords (x), velocities (v) and forces (f)
-nstxout                  = 1000
-nstvout                  = 1000
+nstxout                  = 0
+nstvout                  = 0
 nstfout                  = 0
 ; Output frequency for energies to log file and energy file
 nstlog                   = 1000
@@ -107,7 +107,7 @@ vdw-modifier             = Potential-shift-Verlet
 rvdw-switch              = 0
 rvdw                     = 1.4
 ; Apply long range dispersion corrections for Energy and Pressure
-DispCorr                 = EnerPres
+DispCorr                 = No
 ; Extension of the potential lookup tables beyond the cut-off
 table-extension          = 1
 ; Separate tables between energy group pairs
@@ -129,25 +129,25 @@ implicit-solvent         = no
 
 ; OPTIONS FOR WEAK COUPLING ALGORITHMS
 ; Temperature coupling  
-tcoupl                   = V-rescale
+tcoupl                   = No
 nsttcouple               = -1
 nh-chain-length          = 10
 print-nose-hoover-chain-variables = no
 ; Groups to couple separately
-tc-grps                  = System
+tc-grps                  = 
 ; Time constant (ps) and reference temperature (K)
-tau_t                    = 0.1
-ref_t                    = 298.15
+tau-t                    = 
+ref-t                    = 
 ; pressure coupling     
-pcoupl                   = no
+pcoupl                   = No
 pcoupltype               = Isotropic
 nstpcouple               = -1
 ; Time constant (ps), compressibility (1/bar) and reference P (bar)
 tau-p                    = 1
-compressibility          = 4.5e-5
-ref_p                    = 1.0
+compressibility          = 
+ref-p                    = 
 ; Scaling of reference coordinates, No, All or COM
-refcoord_scaling         = com
+refcoord-scaling         = No
 
 ; OPTIONS FOR QMMM calculations
 QMMM                     = no
@@ -185,12 +185,12 @@ annealing-time           =
 annealing-temp           = 
 
 ; GENERATE VELOCITIES FOR STARTUP RUN
-gen_vel                  = yes
-gen_temp                 = 298.15
-gen_seed                 = -1
+gen-vel                  = no
+gen-temp                 = 300
+gen-seed                 = -1
 
 ; OPTIONS FOR BONDS    
-constraints              = h-bonds
+constraints              = none
 ; Type of constraint algorithm
 constraint-algorithm     = Lincs
 ; Do not constrain the start configuration
