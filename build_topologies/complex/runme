@@ -1,1 +1,95 @@
-gmx grompp -f em.mdp -c complex3_wATPtranslated.gro -r complex3_wATPtranslated.gro -p complex3_wATPtranslated.top -o em.tpr -v -maxwarn 2
+#gmx grompp -f em.mdp -c complex3_wATPtranslated.gro -r complex3_wATPtranslated.gro -p complex3_wATPtranslated.top -o em.tpr -v -maxwarn 2
+gmx grompp -f em.mdp -c take2.gro -r take2.gro -p take2.top -o em.tpr -v -maxwarn 2
+
+# Which atoms should get position restraints?
+# FMN: 1-31  these are the heavy atoms
+    1  ATP  O3A    9   0.240   0.298  -0.324
+    1  ATP   PA   10   0.336   0.412  -0.352
+    1  ATP  O1A   11   0.366   0.437  -0.499
+    1  ATP  O2A   12   0.318   0.513  -0.255
+    1  ATP  O5*   13   0.483   0.327  -0.309
+    1  ATP  C5*   14   0.519   0.215  -0.390
+    1  ATP  C4*   17   0.562   0.109  -0.301
+    1  ATP  O4*   19   0.663   0.177  -0.201
+    1  ATP  C1*   20   0.634   0.090  -0.074
+    1  ATP   N9   22   0.610   0.210   0.037
+    1  ATP   C8   23   0.497   0.292   0.032
+    1  ATP   N7   25   0.499   0.385   0.127
+    1  ATP   C5   26   0.618   0.366   0.191
+    1  ATP   C6   27   0.678   0.430   0.306
+    1  ATP   N6   28   0.623   0.532   0.369
+    1  ATP   N1   31   0.794   0.374   0.349
+    1  ATP   C2   32   0.855   0.271   0.284
+    1  ATP   H2   33   0.952   0.235   0.317
+    1  ATP   N3   34   0.807   0.207   0.180
+    1  ATP   C4   35   0.689   0.255   0.140
+    1  ATP  C3*   36   0.461   0.041  -0.207
+    1  ATP  O3*   38   0.390  -0.064  -0.265
+    1  ATP  C2*   40   0.546  -0.018  -0.085
+    1  ATP  O2*   42   0.615  -0.127  -0.132
+
+#   1ATP    O3A 5200   5.972  12.141   3.459
+#   1ATP     PA 5201   5.944  12.262   3.546
+#   1ATP    O1A 5202   5.962  12.387   3.472
+#   1ATP    O2A 5203   6.021  12.258   3.675
+#   1ATP    O5* 5204   5.784  12.258   3.580
+#   1ATP    C5* 5205   5.748  12.143   3.654
+#   1ATP    C4* 5208   5.646  12.176   3.764
+#   1ATP    O4* 5210   5.642  12.046   3.827
+#   1ATP    C1* 5211   5.707  12.050   3.955
+#   1ATP     N9 5213   5.808  11.943   3.955
+#   1ATP     C8 5214   5.906  11.916   3.857
+#   1ATP     N7 5216   5.987  11.812   3.878
+#   1ATP     C5 5217   5.936  11.771   4.001
+#   1ATP     C6 5218   5.975  11.664   4.084
+#   1ATP     N6 5219   6.079  11.584   4.044
+#   1ATP     N1 5222   5.901  11.650   4.203
+#   1ATP     C2 5223   5.799  11.731   4.238
+#   1ATP     H2 5224   5.762  11.685   4.338  
+#   1ATP     N3 5225   5.756  11.835   4.164
+#   1ATP     C4 5226   5.828  11.849   4.049
+#   1ATP    C3* 5227   5.707  12.285   3.869
+#   1ATP    O3* 5229   5.581  12.342   3.931
+#   1ATP    C2* 5231   5.785  12.189   3.963
+#   1ATP    O2* 5233   5.789  12.231   4.096
+echo "    1  ATP  O3A    9   0.240   0.298  -0.324
+    1  ATP   PA   10   0.336   0.412  -0.352
+    1  ATP  O1A   11   0.366   0.437  -0.499
+    1  ATP  O2A   12   0.318   0.513  -0.255
+    1  ATP  O5*   13   0.483   0.327  -0.309
+    1  ATP  C5*   14   0.519   0.215  -0.390
+    1  ATP  C4*   17   0.562   0.109  -0.301
+    1  ATP  O4*   19   0.663   0.177  -0.201
+    1  ATP  C1*   20   0.634   0.090  -0.074
+    1  ATP   N9   22   0.610   0.210   0.037
+    1  ATP   C8   23   0.497   0.292   0.032
+    1  ATP   N7   25   0.499   0.385   0.127
+    1  ATP   C5   26   0.618   0.366   0.191
+    1  ATP   C6   27   0.678   0.430   0.306
+    1  ATP   N6   28   0.623   0.532   0.369
+    1  ATP   N1   31   0.794   0.374   0.349
+    1  ATP   C2   32   0.855   0.271   0.284
+    1  ATP   H2   33   0.952   0.235   0.317
+    1  ATP   N3   34   0.807   0.207   0.180
+    1  ATP   C4   35   0.689   0.255   0.140
+    1  ATP  C3*   36   0.461   0.041  -0.207
+    1  ATP  O3*   38   0.390  -0.064  -0.265
+    1  ATP  C2*   40   0.546  -0.018  -0.085
+    1  ATP  O2*   42   0.615  -0.127  -0.132"
+
+
+echo "a 1-31\nq\n" | gmx make_ndx -f  FMN_GMX_translated.gro  -o take2_posre_FMN.ndx 
+
+echo "a 9-14 | a 17 | a 19 | a 20 | a 22 | a 23 | a 25-28 | a 31-36 | a 38 | a 40 | a 42\nname 2 posre\nq\n" | gmx make_ndx -f ATP_GMX.gro -o take2_posre_ATP.ndx
+
+
+echo "2\n" | gmx genrestr -f FMN_GMX_translated.gro -n take2_posre_FMN.ndx -o take2_posre_FMN.itp
+echo "2\n" | gmx genrestr -f ATP_GMX.gro -n take2_posre_ATP.ndx -o take2_posre_ATP.itp
+
+
+# modify take2.top to #include  take2_posre_FMN.itp and take2_posre_ATP.itp in their respective places then:
+gmx grompp -f em.mdp -c take2.gro -r take2.gro -p take2.top -o em.tpr -v -maxwarn 2
+
+
+
+
