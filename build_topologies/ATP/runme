@@ -1,0 +1,15 @@
+conda activate openff # this env has Ambertools and acpype
+tleap -f build_ATP.leap
+cp atp.prmtop ATP.prmtop
+cp atp.crd ATP.crd
+acpype -p ATP.prmtop -x ATP.crd -o gmx
+
+
+# make gro of just FMN
+cat ../../ModMonoLigMiliNterminal.pdb| grep " FMN " > FMN_fromMod.pdb
+
+# convert to *.gro (in units nm)
+gmx editconf -f FMN_fromMod.pdb -o FMN_fromMod.gro
+
+# cd build_topologies/FMN; jupyter labs < translate_FMN.ipynb
+

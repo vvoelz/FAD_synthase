@@ -1,0 +1,9 @@
+source oldff/leaprc.ff94
+loadamberparams frcmod.phos
+loadamberprep ATP.prep 
+mol = sequence { atp }
+savepdb mol ATP.pdb
+saveAmberParm mol ATP.prmtop ATP.crd
+quit
+
+
