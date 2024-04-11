@@ -5,7 +5,7 @@
 
 ## Methods
 
-All structural models were mimimized and equilibrated using the GROMACS simulation software, version 2020.4 (Abraham 2015).  Input coordinates were taken from the molecular docking model of *C. ammoniagenes* FAD synthase in complex with ATP/Mg<sup>2+</sup> published by Lars et al. (2018).  The GROMACS tool *pdb2gmx* was used to protonate the  receptor at physiological pH and prepare the topology using the AMBER ff99SB force field ().  Simulation parameters  
+All structural models were mimimized and equilibrated using the GROMACS simulation software, version 2020.4 (Abraham 2015).  Input coordinates were taken from the molecular docking model of *C. ammoniagenes* FAD synthase in complex with ATP/Mg<sup>2+</sup> published by Lars et al. (2018).  The GROMACS tool *pdb2gmx* was used to protonate the  receptor at physiological pH and prepare its topology using the AMBER ff99SB force field ().  AMBER-compatible simulation parameters for adenosine triphosphate (ATP) and were taken from XXX.  AMBER-comp
 
 
 # References
