@@ -1,5 +1,23 @@
 # Molecular simulation model of *C. ammoniagenes* FAD synthase in complex with ATP/Mg<sup>2+</sup> and FMN
 
+Briefly, the protocol was:
+* Minimization of solvent+ions receptor:ATP:Mg2+:FMN with position restraints (on AMP portion of ATP and FMN)
+* 100 ps of NVT md with restraints
+* Re-minimize without restraints
+* 100 ps of NVT md without restraints
+* 200 ps of NPT md without restraints
+* Final minimization without restraints
+
+## Files
+
+* `em_final.gro` - final minimized configuration GROMACS *.gro format
+* `em_final.pdb` - final minimized configuration PDB format
+* `em_final_noSOL_noIONS.gro` - solvent and ions removed GROMACS *.gro format
+* `em_final_noSOL_noIONS.pdb` - solvent and ions removed PDB format
+
+
+#### System preparation
+
 * `build_topologies` - contains work to build AMBER topologies for use with the GROMACS simulation package
 * `solvation_equilibration` - steps to add Mg2+, add solvent and ions, minimize and equilibrate
 
