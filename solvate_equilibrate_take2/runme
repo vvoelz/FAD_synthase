@@ -1,0 +1,20 @@
+# ATP_GMX.itp                       complex_Mg_norest_2SOLremoved.top npt.mdp
+# FMN_GMX.itp                       em_final_2SOLremoved.gro          nvt.mdp
+# README.md                         em_solvated.mdp                   runme
+
+# minimize the system w/out restraints
+### VAV made a complex_Mg_norest.top by removing the #include lines
+gmx grompp -f em_solvated.mdp -c em_final_2SOLremoved.gro -p complex_Mg_norest_2SOLremoved.top -o em.tpr -v -maxwarn 2
+gmx mdrun  -v -s em.tpr -c em.gro
+
+# Then temperature pre-equilibration at NVT  w/out restraints
+gmx grompp -f nvt.mdp -c em.gro -p complex_Mg_norest_2SOLremoved.top -o nvt.tpr -v -maxwarn 2
+gmx mdrun  -v -s nvt.tpr -c nvt.gro
+
+# Pressure equilibrate to determine the correct box volume  - no restraints from here on out
+gmx grompp -f npt.mdp -c nvt.gro -p complex_Mg_norest_2SOLremoved.top -o npt.tpr -v -maxwarn 2
+gmx mdrun -v -s npt.tpr -c npt.gro
+
+# Final minimization at the equilibrated box volume
+gmx grompp -f em_solvated.mdp -c npt.gro -p complex_Mg_norest_2SOLremoved.top -o em_final.tpr -v -maxwarn 2
+gmx mdrun  -v -s em_final.tpr -c em_final.gro

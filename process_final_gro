@@ -5,8 +5,8 @@ cp  solvate_equilibrate/em_final.gro ./
 gmx editconf -f em_final.gro -o em_final.pdb
 
 # Make a version with no solvent and no counterions
-echo "24 | 18\nq\n" | gmx make_ndx -f em_final.gro -o index.ndx
-echo "28\nq\n" | gmx editconf -f solvate_equilibrate/em_final.gro -n index.ndx -o em_final_noSOL_noIONS.gro
+echo "\!24 & \!18\n28 | 15\nq\n" | gmx make_ndx -f em_final.gro -o index.ndx
+echo "29\nq\n" | gmx editconf -f solvate_equilibrate/em_final.gro -n index.ndx -o em_final_noSOL_noIONS.gro
 
 # Convert this gro to a PDB too
 gmx editconf -f em_final_noSOL_noIONS.gro -o em_final_noSOL_noIONS.pdb

@@ -48368,16 +48368,16 @@ Protein_chain_A     3
 
 ; Include FMN topology     
 #include "FMN_GMX.itp"
+#include "take2_posre_FMN.itp"
+
 
 ; Include ATP topology  
 #include "ATP_GMX.itp"
+#include "take2_posre_ATP.itp"
 
 
 ; Include water topology
 #include "amber99sb.ff/tip3p.itp"
-
-; Position restraints for cofactors
-#include "take2_posre.itp"
 
 ; Include topology for ions
 #include "amber99sb.ff/ions.itp"
